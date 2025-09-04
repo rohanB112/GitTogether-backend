@@ -5,6 +5,9 @@ const cors = require("cors");
 
 const app = express();
 
+require("dotenv").config();
+console.log(process.env.MONGODB_CONNECTION_STRING);
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -27,7 +30,7 @@ app.use("/", userRouter);
 connectDB()
   .then(() => {
     console.log("connected to DB successfully.");
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("listening on port 3000.");
     });
   })
